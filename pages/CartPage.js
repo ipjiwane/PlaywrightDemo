@@ -8,6 +8,7 @@ exports.CartPage = class CartPage {
         this.remove_buttons = page.$$("//*[text()='Remove']");
         this.empty_cart_message = page.locator("//*[text()='Your Cart is Empty.']");
         this.quantity_elements = page.locator("//div[@data-test='inventory-item']").all();
+        this.cart_footer_element = page.locator(".cart_footer");
     }
 
     //function to verify if the checkout button is present or not
@@ -35,5 +36,14 @@ exports.CartPage = class CartPage {
             // await expect(element.locator("//*[text()='Remove']")).toBeVisible();
             await expect(element.locator("//*[text()='Quantity']")).toBeVisible();
         }
+    }
+
+    async verifyCheckOutButtonPosition(){
+        await expect(this.cart_footer_element).toHaveScreenshot("cart_footer.png")
+    }
+
+
+    async proceedToCheckout(){
+        await this.checkout_button.click();
     }
 }
